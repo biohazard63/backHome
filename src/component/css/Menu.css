@@ -1,0 +1,50 @@
+/* Fichier CSS */
+
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0px; /* cache le menu à l'extérieur de la vue */
+    background-color: #333;
+    transition: left 0.3s ease; /* animation pour le menu */
+    padding: 1em;
+}
+
+.menu.open {
+    left: 0; /* montre le menu quand il est ouvert */
+    width: 200px;
+
+}
+
+.menu .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.menu .menu-header button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin-bottom: 1em;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: #ccc;
+}

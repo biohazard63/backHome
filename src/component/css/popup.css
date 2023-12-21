@@ -1,0 +1,80 @@
+.popup-overlay {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.popup {
+    background-color: #f9f9f9;
+    width: 90%;
+    max-width: 400px;
+    color: #333;
+    padding: 2em;
+    border-radius: 10px; /* Ajout d'un bord arrondi */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Ajout d'une ombre */
+    transition: all 0.3s ease-out; /* Ajout d'une animation */
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5em; /* Espacement entre le titre et le contenu */
+}
+
+.popup-title {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #666;
+    margin: 0;
+}
+
+.popup-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #bbb;
+}
+
+.popup-content input[type="text"],
+.popup-content input[type="email"],
+.popup-content input[type="date"],
+.popup-content input[type="tel"],
+.popup-content select {
+    width: 100%; /* Champs à pleine largeur */
+    padding: .5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.popup-content label {
+    display: block;
+    margin-bottom: 1em;
+}
+.popup-submit {
+     display: block;
+     width: 100%;
+     padding: 0.5em;
+     margin-top: 1em;
+     background-color: #4CAF50; /* À changer pour le couleur que vous voulez */
+     border: none;
+     color: white;
+     text-align: center;
+     text-decoration: none;
+     font-size: 16px;
+     transition: background-color 0.3s;
+     border-radius: 5px;
+     cursor:pointer;
+ }
+
+.popup-submit:hover {
+    background-color: #45a049; /* À changer pour le couleur que vous voulez */
+}

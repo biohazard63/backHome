@@ -1,0 +1,71 @@
+/* Fichier css/HomeView.css */
+
+.home-view {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*align-content: center;*/
+    text-align: center;
+    height: 100vh;
+    /*background-color: #f0f0f0;*/
+}
+
+.home-view h1 {
+    margin-bottom: 1em;
+    color: #ffffff;
+}
+
+.home-view button {
+    margin: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 1.1rem;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #d3d12c;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-view button:hover {
+    background-color: rgba(211, 209, 44, 0.56);
+}
+
+/* Styles pour les formulaires */
+
+.home-view form {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.home-view form input {
+    margin-bottom: 1em;
+    padding: 0.5em;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.home-view form button {
+    padding: 0.5em 1em;
+    font-size: 1.1rem;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #d3d12c;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-view form button:hover {
+    background-color: rgba(211, 209, 44, 0.56);
+}
+
+.home-view .back-button {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+}

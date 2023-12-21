@@ -1,0 +1,60 @@
+.profile-view {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Pour rendre l'image de profil ronde */
+    object-fit: cover;
+}
+
+.profile-view .profile-item {
+    margin: 15px auto;
+    text-align: left;
+    font-size: 1.125em;
+}
+
+.profile-view .profile-item:before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.profile-button {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 1em;
+    background-color: #4CAF50; /* À changer pour le couleur que vous voulez */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+.profile-button:hover {
+    background-color: #45a049; /* À changer pour le couleur que vous voulez */
+}
+
+.profile-maps {
+    height: 300px;
+    width: 700px;
+}
+.profile-maps > .leaflet-container {
+    height: 100%;
+    width: 100%;
+}
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+}
