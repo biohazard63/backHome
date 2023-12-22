@@ -18,8 +18,7 @@ const HomeView: React.FC = () => {
 
         <div className="home-view">
             <h1>Back Home!</h1>
-            <button onClick={() => navigate("signup")}>Inscrivez-vous</button>
-            <button onClick={() => navigate("login")}>Connectez-vous</button>
+            <button onClick={() => navigate('/Signup')}>Connexion</button>
         </div>
         </div>
     );

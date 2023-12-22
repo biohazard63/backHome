@@ -1,51 +1,50 @@
 import React from 'react';
+import { auth, firestore } from '../app';
+import firebase from 'firebase/compat/app';
 import { useNavigate } from 'react-router-dom';
-import "../css/HomeView.css";
-import BackButton from "../component/BackButton";
+import './css/SignUp.css'; // Import CSS file
 
-// Composant pour l'inscription
-/**
- * SignUp component is a functional component that renders a registration form
- * and handles form submissions.
- *
- * @returns The rendered SignUp component with a registration form.
- */
-const SignUp: React.FC = () => {
+const SignUp = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    };
+    const googleSignIn = async () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
+        try {
+            const authResult = await auth.signInWithPopup(provider);
+            if (!authResult) throw new Error('Unable to authenticate user');
 
-    const handleFormSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+            const { user } = authResult;
+            if (!user) throw new Error('Unable to retrieve user info');
 
+            // Usird info
+            const { uid, displayName, email } = user;
 
-        new Promise((resolve, reject) => {
-            setTimeout(resolve, 1000); // Simulation d'une inscription réussie en 1 seconde
-        }).then(() => {
-            // Après une inscription réussie, on redirige vers ProfileView
+            // Check if user doc already exists
+            const docRef = firestore.collection('users').doc(uid);
+            const doc = await docRef.get();
+
+            if (!doc.exists) {
+                // Create a new user document
+                await docRef.set({
+                    uid,
+                    name: displayName,
+                    email,
+
+                });
+            }
+
             navigate('/ProfileView');
-        });
+        } catch (error) {
+            console.error('Google sign in was unsuccessful:', error);
+        }
     };
+
     return (
-
-        <div className="home-view">
-            <h2>Formulaire d'inscription</h2>
-
-            <form onSubmit={handleFormSubmit}>
-                <input type="email" value={email} onChange={handleEmailChange} placeholder="Email" required/>
-                <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password"
-                       required/>
-                <button type="submit">Inscrivez-vous</button>
-            </form>
-
+        <div className="signupContainer">
+            <button className="googleBtn" onClick={googleSignIn}>
+                <img src="https://developers.google.com/identity/images/btn_google_signin_light_normal_web.png" alt="Sign up with Google"/>
+            </button>
         </div>
     );
 };

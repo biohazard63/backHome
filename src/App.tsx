@@ -6,20 +6,32 @@ import ProfileView from "./View//ProfileView";
 import Parametreview from "./View/Parametreview";
 import MsgView from "./View//MsgView";
 import MessageView from "./component/MessageView";
-import ConversationList from "./component/ConversationList";
 import Menu from "./component/Menu";
 
-/**
- * The App component is responsible for rendering the routes and components of the application.
- *
- * @returns {JSX.Element} The rendered React element.
- */
+import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAJDs_KZes4Uv9n4_aeOo-j4ufst-mVevI",
+    authDomain: "backsamehome.firebaseapp.com",
+    projectId: "backsamehome",
+    storageBucket: "backsamehome.appspot.com",
+    messagingSenderId: "1082898499737",
+    appId: "1:1082898499737:web:a139409e53f7d6ce0d5008"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
 function App() {
     return (
         <Router>
             <Menu />
             <Routes>
-
                 <Route path="/HomeView" element={<HomeView />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />

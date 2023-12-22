@@ -1,0 +1,16 @@
+.signupContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.googleBtn {
+    background: #15121200;
+    border: none;
+    cursor: pointer;
+}
+
+.googleBtn img {
+    width: 200px;
+}
