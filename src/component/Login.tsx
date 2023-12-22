@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/HomeView.css";
-import BackButton from "../component/BackButton";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 /**
  * @description Represents a login component with email and password fields.
@@ -18,14 +18,23 @@ const Login: React.FC = () => {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Your logic to connect using `email` and `password` goes here
+        try {
+            /** signInWithEmailAndPassword throws an error if the user does not exist,
+             * you handle it here by creating the new user account
+             */
+            await signInWithEmailAndPassword(email, password);
+        } catch (error) {
+            if (error.code === 'auth/user-not-found') {
+                await createUserWithEmailAndPassword(email, password);
+            } else {
+                console.error(error); // handle error display
+            }
+        }
     };
 
     return (
-
-
         <div className="home-view">
             <h2>Formulaire de connexion</h2>
             <form onSubmit={handleSubmit}>
