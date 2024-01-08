@@ -1,6 +1,7 @@
 import React from 'react';
 
 /**
+ * // import firebase from "firebase/compat/app";
  * Represents a component for rendering a list of messages.
  * @param {object} props - The properties object.
  * @param {array} props.messages - An array of message objects. Default value is an empty array.

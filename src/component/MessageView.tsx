@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import MessageList from "./MessageList";
 import MessageInput from "./MessageInput";
 
+// import firebase from "firebase/compat/app";
+
 /**
  * Represents a message view component.
  * @return {ReactElement} - The rendered message view component.

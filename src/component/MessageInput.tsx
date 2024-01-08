@@ -34,5 +34,5 @@ const MessageInput = ({ onMessageSubmit }) => {
         </form>
     );
 };
-
+// import firebase from "firebase/compat/app";
 export default MessageInput;

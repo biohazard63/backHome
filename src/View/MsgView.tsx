@@ -5,7 +5,7 @@ import MessageList from '../component/MessageList';
 
 /**
  * MsgView represents a message view component in a chat application.
- *
+ * // import firebase from "firebase/compat/app";
  * @component
  * @example
  * ```jsx
