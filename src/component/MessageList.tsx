@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import firebase from 'firebase/compat/app';
+import 'firebase/firestore';
 
-/**
- * // import firebase from "firebase/compat/app";
- * Represents a component for rendering a list of messages.
- * @param {object} props - The properties object.
- * @param {array} props.messages - An array of message objects. Default value is an empty array.
- * @returns {JSX.Element} - The rendered list of messages as a JSX element.
- */
-const MessageList = ({ messages = [] }) => {  // assign a default value: an empty array
+const MessageList = ({ conversationId }) => {
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            const db = firebase.firestore();
+            const messagesCollection = db.collection('MsgUser');
+            const messagesSnapshot = await messagesCollection.where('conversationId', '==', conversationId).get();
+
+            const fetchedMessages = messagesSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id })); // map over the docs in the snapshot to create a new array of message objects
+            setMessages(fetchedMessages);
+        };
+
+        fetchMessages();
+    }, [conversationId]);
+
     return (
         <ul>
-            {Array.isArray(messages) && messages.map((message) => (  // check if messages is an array before map over it
+            {Array.isArray(messages) && messages.map((message) => (
                 <li key={message.id}>
-                    <h3>{message.sender}</h3>
-                    <p>{message.text}</p>
+                    <h3>{message.userId}</h3>
+                    <p>{message.message}</p>
                 </li>
             ))}
         </ul>
