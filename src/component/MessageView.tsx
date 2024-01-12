@@ -1,26 +1,39 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import MessageList from "./MessageList";
-import MessageInput from "./MessageInput";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import MessageList from './MessageList';
+import MessageInput from './MessageInput';
+import firebase from 'firebase/compat/app';
+import 'firebase/firestore';
 
-// import firebase from "firebase/compat/app";
+const MessageView = () => {
+    let { id: conversationId } = useParams();
 
-/**
- * Represents a message view component.
- * @return {ReactElement} - The rendered message view component.
- */
-function MessageView() {
-    let { id } = useParams();
+    console.log('MessageView rendering for conversationId', conversationId);
 
-    // Utilisez l'ID pour récupérer les messages de cette conversation
-    const messages = []; // remplacez par vos données
+    const onMessageSubmit = async (messageText) => {
+        console.log('New message submitted:', messageText);
+
+        // Save the message to Firestore
+        const db = firebase.firestore();
+        try {
+            const docRef = await db.collection('MsgUser').add({
+                message: messageText,
+                conversationId: conversationId,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),  // Add a timestamp
+            });
+            console.log("Message written with ID: ", docRef.id);
+        } catch (error) {
+            console.error("Error adding message:", error);
+        }
+    };
+
 
     return (
         <div>
-            <MessageList messages={messages} />
-            <MessageInput />
+            <MessageList conversationId={conversationId} />
+            <MessageInput onMessageSubmit={onMessageSubmit} />
         </div>
     );
-}
+};
 
 export default MessageView;

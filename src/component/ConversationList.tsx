@@ -1,32 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import firebase from 'firebase/compat/app';
+import 'firebase/firestore';
 import ConversationItem from './ConversationItem';
 
-/**
- * Represents a component that renders a list of conversations.
- *
- * @typedef {Function} ConversationList
- * @param {Object} props - The props for the ConversationList component.
- * @param {Function} props.onConversationClick - The callback function that is called when a conversation is clicked.
- * @returns {JSX.Element} - The rendered ConversationList component.
- */
 const ConversationList = ({ onConversationClick }) => {
-    const conversations = [
-        { id: 1, name: 'User 1', lastMessage: 'Hello' },
-        { id: 2, name: 'User 2', lastMessage: 'Hi' },
-        { id: 3, name: 'User 3', lastMessage: 'Hey' },
-    ];
+    const [conversations, setConversations] = useState([]);
+
+    useEffect(() => {
+        const fetchConversations = async () => {
+            console.log('fetchConversations called');
+            const db = firebase.firestore();
+            const conversationsCollection = db.collection('MsgUser'); // Ensure this matches your collection name
+            const conversationsSnapshot = await conversationsCollection.get();
+
+            const fetchedConversations = conversationsSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+            console.log('Fetched conversations in ConversationList', fetchedConversations);
+
+            setConversations(fetchedConversations);
+        };
+
+        fetchConversations();
+    }, []);
 
     return (
         <div>
-            {conversations.map(conversation => (
-                <ConversationItem
-                    key={conversation.id}
-                    conversation={conversation}
-                    onConversationClick={onConversationClick}
-                />
-            ))}
+            {conversations.length > 0 ? (
+                conversations.map(conversation => (
+                    <ConversationItem
+                        key={conversation.id}
+                        conversation={conversation}
+                        onConversationClick={onConversationClick}
+                    />
+                ))) : (
+                <p>No conversations found.</p>
+            )}
         </div>
     );
-};
-
+}
 export default ConversationList;

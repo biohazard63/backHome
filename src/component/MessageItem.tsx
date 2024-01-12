@@ -10,6 +10,8 @@ import React from 'react';
  * @returns {JSX.Element} - The rendered message item component.
  */
 const MessageItem = ({ message }) => {
+    console.log('Rendering MessageItem', message);
+
     return (
         <div>
             <p><strong>{message.sender}</strong>: {message.text}</p>

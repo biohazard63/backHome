@@ -1,17 +1,10 @@
-import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-/**
- * Represents a single item in a conversation list.
- * @param {Object} props - The props for the ConversationItem component.
- * @param {Object} props.conversation - The conversation object.
- * @param {string} props.conversation.id - The ID of the conversation.
- * @param {string} props.conversation.name - The name of the conversation.
- * @param {string} props.conversation.lastMessage - The last message in the conversation.
- * @returns {JSX.Element} The rendered ConversationItem component.
- */
-const ConversationItem = ({ conversation }) => {
+const ConversationItem = ({ conversation: initialConversation }) => {
+    console.log('Rendering ConversationItem', initialConversation);
     let navigate = useNavigate();
+    const [conversation, setConversation] = useState(initialConversation);
 
     const handleClick = () => {
         navigate(`/MsgView/conversation/${conversation.id}`);
@@ -19,8 +12,8 @@ const ConversationItem = ({ conversation }) => {
 
     return (
         <div onClick={handleClick}>
-            <h2>{conversation.name}</h2>
-            <p>{conversation.lastMessage}</p>
+            <h2>{conversation.sender}</h2>
+            <p>{conversation.message}</p>
         </div>
     );
 };

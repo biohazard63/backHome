@@ -14,6 +14,8 @@ const MessageInput = ({ onMessageSubmit }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (message.trim() === '') return;
+
+        console.log('Submitting message', message);
         onMessageSubmit(message);
         setMessage('');
     };
@@ -34,5 +36,5 @@ const MessageInput = ({ onMessageSubmit }) => {
         </form>
     );
 };
-// import firebase from "firebase/compat/app";
+
 export default MessageInput;
