@@ -15,7 +15,6 @@ const MessageInput = ({ onMessageSubmit }) => {
         e.preventDefault();
         if (message.trim() === '') return;
 
-        console.log('Submitting message', message);
         onMessageSubmit(message);
         setMessage('');
     };

@@ -7,14 +7,12 @@ const MessageList = ({ conversationId }) => {
 
     useEffect(() => {
         const fetchMessages = () => {
-            console.log('fetchMessages called');
             const db = firebase.firestore();
             const messagesCollection = db.collection('MsgUser')
                 .where('conversationId', '==', conversationId)
                 .orderBy('timestamp');  // Sort the messages by timestamp
             const unsubscribe = messagesCollection.onSnapshot(snapshot => {
                 const fetchedMessages = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-                console.log('Fetched messages in MessageList', fetchedMessages);
                 setMessages(fetchedMessages);
             });
 

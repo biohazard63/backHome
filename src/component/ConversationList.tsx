@@ -8,13 +8,11 @@ const ConversationList = ({ onConversationClick }) => {
 
     useEffect(() => {
         const fetchConversations = async () => {
-            console.log('fetchConversations called');
             const db = firebase.firestore();
             const conversationsCollection = db.collection('MsgUser'); // Ensure this matches your collection name
             const conversationsSnapshot = await conversationsCollection.get();
 
             const fetchedConversations = conversationsSnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-            console.log('Fetched conversations in ConversationList', fetchedConversations);
 
             setConversations(fetchedConversations);
         };
